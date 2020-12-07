@@ -1,0 +1,4 @@
+// guide for linter
+{
+  "extends": "stylelint-config-standard"
+}
