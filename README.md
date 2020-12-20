@@ -10,11 +10,9 @@ API Recipes Websites with VueJS frontend & Rails backend
 ### Prerequisite:
 - Docker<br>
 - For running on local:
-```
-MySQL
-Rails
-VueJS
-```
+  - MySQL
+  - Rails
+  - VueJS
 
 ## Member
 <a href="https://github.com/minhld99/Millionaire/graphs/contributors">
