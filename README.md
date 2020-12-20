@@ -1,24 +1,41 @@
-# README
+# Recipes Websites
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+API Recipes Websites with VueJS frontend & Rails backend
 
-Things you may want to cover:
+## Table of contents
+* [Prerequisite](#prerequisite)
+* [Members](#member)
+* [How to run](#how-to-run)
 
-* Ruby version
+### Prerequisite:
+- Docker<br>
+- For running on local:
+```
+MySQL
+Rails
+VueJS
+```
 
-* System dependencies
+## Member
+<a href="https://github.com/minhld99/Millionaire/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=minhld99/Millionaire" />
+</a>
 
-* Configuration
+### How to run:
+Build this app using docker 
+```
+$ docker-compose up --build
+```
+Open docker bash and generate some fake data
+```
+$ docker exec -ti rails bash
+(docker) $ rails db:migrate
+(docker) $ rails db:seed
+```
+Account for testing
+```
+- Email: test@test.com
+- Password: password
+```
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Enter this link for login: [Login](http://localhost:8081/login)
