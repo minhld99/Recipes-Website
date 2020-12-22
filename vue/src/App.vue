@@ -1,85 +1,92 @@
 <template>
-  <div>
-    <nav class="navbar is-light" role="navigation" aria-label="main navigation">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-        </div>
-
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div v-if="isAuthenticated" class="buttons">
-              <router-link :to="{name: 'profile', params: {id: userId}}" v-text="userName" class="button is-text">
-              </router-link>
-              <button class="button is-outlined" @click="logout">
-                Log out
-              </button>
-            </div>
-
-            <div v-else class="buttons">
-              <router-link to="/register" class="button is-success">
-                Sign up
-              </router-link>
-              <router-link to="/login" class="button is-outlined">
-                Log in
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <section class="hero">
-      <div class="hero-body">
-        <div class="container">
-          <div class="columns">
-            <div class="column is-6 is-offset-3">
-              <b-message title="Danger" type="is-danger" v-if="getErrors" @close="close">
-                {{ getErrors }}
-              </b-message>
-            </div>
-          </div>
-          <router-view></router-view>
-        </div>
-      </div>
-    </section>
-  </div>
+  <v-app>
+    <app-navbar />
+    <app-main />
+    <app-footer />
+    <v-tooltip left>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          color="#04b4d4"
+          dark
+          fab
+          fixed
+          right
+          class="add-recipe"
+          aria-label="Add recipe"
+          @click="addRecipe"
+          v-on="on"
+        >
+          <v-icon>mdi_plus</v-icon>
+        </v-btn>
+      </template>
+      <span>Add Recipe</span>
+    </v-tooltip>
+  </v-app>
 </template>
 
 <script>
+import AppNavbar from "./components/layout/Navbar";
+import AppMain from "./components/layout/Main";
+import AppFooter from "./components/layout/Footer";
+import mdi_plus from 'mdi-vue/Plus.vue';
 export default {
-  name: 'app',
+  name: 'recipes-website',
 
-  methods: {
-    logout() {
-      this.$store.commit('logout')
-      this.$router.push('/login')
-    },
-
-    close() {
-      this.$store.commit('setErrors', null);
-    }
+  components: {
+    AppNavbar,
+    AppMain,
+    AppFooter,
+    mdi_plus
   },
 
+  data() {
+    return {
+      routeName: this.$route.name,
+      isAuthenticated: false
+    };
+  },
+  watch: {
+    "$route.name": {
+      handler(routeName) {
+        this.routeName = routeName;
+      },
+      deep: true,
+      immediate: true
+    }
+  },
   computed: {
-    isAuthenticated() {
-      return this.$store.getters.isAuthenticated;
-    },
-
-    userId() {
-      return this.$store.getters.getUserId;
-    },
-
-    userName() {
-      return this.$store.getters.getUserName;
-    },
-
-    getErrors() {
-      return this.$store.getters.getErrors;
+    displayNavAndFooter() {
+      return this.routeName === "register" || this.routeName === "login";
+    }
+  },
+  methods: {
+    addRecipe() {
+      if (!this.isAuthenticated) {
+        this.$router.push("/accounts/login");
+      } else {
+        this.$router.push("/recipes/new");
+      }
     }
   }
-}
+};
 </script>
 
-<style>
-
+<style lang="scss">
+@import "./scss/style";
+#app {
+  font-family: $primary-font;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $body-color;
+  letter-spacing: 1px;
+}
+html {
+  overflow: hidden;
+}
+.add-recipe {
+  top: 89vh;
+}
 </style>
