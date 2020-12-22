@@ -21,9 +21,9 @@
 //     next('/login')
 // }
 
-export const routes = [
+// export const routes = [
 
     // { path: '/register', component: Register, beforeEnter: ifNotAuthenticated },
     // { path: '/login', component: Login, beforeEnter: ifNotAuthenticated },
     // { path: '/users/profile/:id', component: Profile, name: 'profile', beforeEnter: ifAuthenticated },
-];
+// ];
