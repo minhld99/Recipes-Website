@@ -50,7 +50,7 @@ module Api
       private
 
       def recipe_params
-        params.permit(:title, :category, :preparation_time, :oven_time, :ingredients, :steps, :image)
+        params.permit(:title, :description, :category, :preparation_time, :cooking_time, :ingredients, :instructions, :serving, :dificulty, :vegetarian, :image)
       end
     end
   end
