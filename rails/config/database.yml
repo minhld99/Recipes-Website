@@ -13,14 +13,14 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: minh2610
-  host: localhost
+  username: hust_web_121223
+  password: 0ROk5ttMxO8U2WSu
+  host: 103.124.95.89
   port: 3306
 
 development:
   <<: *default
-  database: FoodRecipes
+  database: hust_web_005
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
