@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  belongs_to :user, optional: true
+  # has_one_attached :image
 
   validates :title, presence: true
   validates :category, presence: true
@@ -10,5 +12,34 @@ class Recipe < ApplicationRecord
   validates :serving, presence: true
   validates :dificulty, presence: true
 
-  belongs_to :user
+  MAX_IMAGE_SIZE = 5.megabytes
+  before_validation :format_title_description
+  validate :correct_image_type
+  validate :correct_image_size
+
+  private
+
+    # Validates, Formats description before presisting to db.
+    def format_title_description
+      if description.present? && title.present?
+        self.description = description.strip.capitalize
+        self.title = title.strip.capitalize
+      end
+    end
+
+    def correct_image_type
+      if image.attached?
+        if !image.content_type.in?(%w[image/jpg image/png])
+          errors.add(:image, 'must be of content types: jpg, png')
+        end
+      end
+    end
+
+    def correct_image_size
+      if image.attached?
+        if image.byte_size > MAX_IMAGE_SIZE
+          errors.add(:image, 'is too large, max file size is 5mb')
+        end
+      end
+    end
 end

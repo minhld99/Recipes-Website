@@ -1,15 +1,15 @@
 class Api::V1::RecipesController < ApplicationController
+  before_action :authenticate_request, only: %i[create update destroy]
+  
   def index
-    # ideia 1: Add pagination
-    # ideia 2: Add filter by category
-    recipes = Recipe.select('recipes.*, users.name as user_name')
+    recipes = Recipe.select('recipes.*', 'users.name as user_name')
       .joins(:user)
       .order('recipes.created_at DESC')
     render json: recipes, status: :ok
   end
 
   def show
-    recipe = Recipe.select('recipes.*, users.name as user_name')
+    recipe = Recipe.select('recipes.*', 'users.name as user_name')
       .joins(:user)
       .where('recipes.id = ' + params[:id])
       .first()
