@@ -1,16 +1,16 @@
 class Recipe < ApplicationRecord
   belongs_to :user, optional: true
-  # has_one_attached :image
+  has_one_attached :image
 
   validates :title, presence: true
-  validates :category, presence: true
+  validates :type, presence: true
   validates :description, presence: true
   validates :preparation_time, presence: true
   validates :cooking_time, presence: true
   validates :ingredients, presence: true
   validates :instructions, presence: true
   validates :serving, presence: true
-  validates :dificulty, presence: true
+  validates :difficulty, presence: true
 
   MAX_IMAGE_SIZE = 5.megabytes
   before_validation :format_title_description
@@ -29,8 +29,8 @@ class Recipe < ApplicationRecord
 
     def correct_image_type
       if image.attached?
-        if !image.content_type.in?(%w[image/jpg image/png])
-          errors.add(:image, 'must be of content types: jpg, png')
+        if !image.content_type.in?(%w[image/jpeg image/png])
+          errors.add(:image, 'must be of content types: jpg/jpeg, png')
         end
       end
     end
