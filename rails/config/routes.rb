@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get 'users/:id', to: 'users#show'
 
       resources :recipes
+      post 'recipes', to: 'recipes#create'
     end
   end
 

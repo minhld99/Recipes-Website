@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
   has_one_attached :image
 
   validates :title, presence: true
-  validates :type, presence: true
+  validates :recipeType, presence: true
   validates :description, presence: true
   validates :preparation_time, presence: true
   validates :cooking_time, presence: true
@@ -11,8 +11,9 @@ class Recipe < ApplicationRecord
   validates :instructions, presence: true
   validates :serving, presence: true
   validates :difficulty, presence: true
+  validates :image, presence: true
 
-  MAX_IMAGE_SIZE = 5.megabytes
+  MAX_IMAGE_SIZE = 10.megabytes
   before_validation :format_title_description
   validate :correct_image_type
   validate :correct_image_size
@@ -38,7 +39,7 @@ class Recipe < ApplicationRecord
     def correct_image_size
       if image.attached?
         if image.byte_size > MAX_IMAGE_SIZE
-          errors.add(:image, 'is too large, max file size is 5mb')
+          errors.add(:image, 'is too large, max file size is 10mb')
         end
       end
     end
