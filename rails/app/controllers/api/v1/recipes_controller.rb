@@ -1,5 +1,5 @@
 class Api::V1::RecipesController < ApplicationController
-  before_action :authenticate_request, only: %i[create update destroy]
+  before_action :authenticate_request, only: %i[create destroy]
   
   def index
     recipes = Recipe.select('recipes.*', 'users.name as user_name')
