@@ -11,8 +11,8 @@ Rails.application.routes.draw do
       post 'users', to: 'users#create'
       get 'users/:id', to: 'users#show'
 
+      get 'recipes/recipeByType', to: 'recipes#recipeByType'
       resources :recipes
-      post 'recipes', to: 'recipes#create'
     end
   end
 

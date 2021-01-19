@@ -1,5 +1,5 @@
 class Api::V1::RecipesController < ApplicationController
-  before_action :authenticate_request, only: %i[create update destroy]
+  before_action :authenticate_request, only: %i[create destroy]
   
   def index
     recipes = Recipe.select('recipes.*', 'users.name as user_name')
@@ -43,6 +43,15 @@ class Api::V1::RecipesController < ApplicationController
     else
       render json: {errors: recipe.errors}, status: :unprocessable_entity
     end
+  end
+
+  def recipeByType
+    # recipes = Recipe.find(params[:recipeType])
+    recipes = Recipe.select('recipes.*', 'users.name as user_name')
+      .joins(:user)
+      .where("recipes.recipeType like ?", "%#{params[:recipeType]}%")
+      .order('recipes.created_at DESC')
+    render json: recipes, status: :ok
   end
 
   private
