@@ -45,6 +45,15 @@ class Api::V1::RecipesController < ApplicationController
     end
   end
 
+  def recipeByType
+    # recipes = Recipe.find(params[:recipeType])
+    recipes = Recipe.select('recipes.*', 'users.name as user_name')
+      .joins(:user)
+      .where("recipes.recipeType like ?", "%#{params[:recipeType]}%")
+      .order('recipes.created_at DESC')
+    render json: recipes, status: :ok
+  end
+
   private
 
   def recipe_params
