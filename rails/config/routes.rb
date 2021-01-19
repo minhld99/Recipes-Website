@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  if Rails.env.development?
+    scope format: true, constraints: { format: /jpg|png|gif|PNG/ } do
+      get '/*anything', to: proc { [404, {}, ['']] }, constraints: lambda { |request| !request.path_parameters[:anything].start_with?('rails/') }
+    end
+  end
+  
   namespace 'api' do
     namespace 'v1' do
       resources :users
