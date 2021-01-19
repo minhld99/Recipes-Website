@@ -45,7 +45,7 @@ class Api::V1::RecipesController < ApplicationController
     end
   end
 
-  def recipeByType
+  def sortByType
     # recipes = Recipe.find(params[:recipeType])
     recipes = Recipe.select('recipes.*', 'users.name as user_name')
       .joins(:user)
@@ -57,6 +57,6 @@ class Api::V1::RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:title, :description, :preparation_time, :cooking_time, :serving, :difficulty, :vegetarian, :rating, :views, image: {}, :recipeType => [], :ingredients => [], :instructions => [])
+    params.permit(:title, :description, :preparation_time, :cooking_time, :serving, :difficulty, :vegetarian, :rating, :views, :image, :recipeType => [], :ingredients => [], :instructions => [])
   end
 end
