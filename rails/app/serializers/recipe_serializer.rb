@@ -11,7 +11,7 @@ class RecipeSerializer < ActiveModel::Serializer
   # end
 
   def user_name
-    Recipe.select('users.name as user_name').joins(:user)[1]["user_name"]
+    Recipe.select('users.name as user_name').joins(:user).where(:users => {:id => object.user_id})[0]['user_name']
   end
 
   # def serializable_hash(adapter_options = nil, options = {}, adapter_instance = self.class.serialization_adapter_instance)
