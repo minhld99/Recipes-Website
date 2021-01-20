@@ -4,8 +4,8 @@ class User < ApplicationRecord
 
   validates :full_name, presence: true, uniqueness: true
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, presence: true, confirmation: true, :on => :create
+  validates :password_confirmation, presence: true, :on => :create
   validates :name, presence: true
 
   has_many :recipes

@@ -1,9 +1,8 @@
 class Api::V1::UsersController < ApplicationController
-  skip_before_action :authenticate_request#, :except => [:update]
+  skip_before_action :authenticate_request, :except => [:update]
 
   def show
     user = User.find(params[:id])
-    # data = {:user => user, :recipes => user.recipes}
     render json: user, status: :ok
   end
 
