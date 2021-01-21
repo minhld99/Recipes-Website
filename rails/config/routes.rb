@@ -13,6 +13,9 @@ Rails.application.routes.draw do
 
       get 'recipes/sortByType', to: 'recipes#sortByType'
       resources :recipes
+
+      get 'comments/commentList/:recipe_id', to: 'comments#index'
+      resources :comments
     end
   end
 
