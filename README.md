@@ -36,7 +36,8 @@ $ bundle install
 $ rake db:migrate
 $ rails s
 ```
-3. Run vue-app on browser (inside submodule [https://github.com/linhntt011199/recipeswebsitefrontend](https://github.com/linhntt011199/recipeswebsitefrontend)
+3. Run vue-app on browser\
+(inside this submodule [https://github.com/linhntt011199/recipeswebsitefrontend](https://github.com/linhntt011199/recipeswebsitefrontend))
 ```
 $ cd recipeswebsitefrontend
 $ npm install
